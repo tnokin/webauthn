@@ -29,11 +29,7 @@ const parseAuthenticatorKey = (webAuthnResponse) => {
     }
 
     if (authenticatorKey.fmt === 'android-safetynet') {
-//        return verifySafetyNetAttestation(webAuthnResponse);
-        return parseFidoPackedKey(
-            authenticatorKey,
-            webAuthnResponse.clientDataJSON
-        );
+        return verifySafetyNetAttestation(webAuthnResponse);
     }
 
     return undefined;
