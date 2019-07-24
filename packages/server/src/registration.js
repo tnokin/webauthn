@@ -4,6 +4,7 @@ const { randomBase64Buffer } = require('./utils');
 const { getChallengeFromClientData } = require('./getChallengeFromClientData');
 const { parseFidoU2FKey } = require('./authenticatorKey/parseFidoU2FKey');
 const { parseFidoPackedKey } = require('./authenticatorKey/parseFidoPackedKey');
+const { verifySafetyNetAttestation } = require('./authenticatorKey/parseAndroidSafetynet');
 const { validateRegistrationCredentials } = require('./validation');
 
 const parseAuthenticatorKey = (webAuthnResponse) => {
@@ -21,6 +22,14 @@ const parseAuthenticatorKey = (webAuthnResponse) => {
     }
 
     if (authenticatorKey.fmt === 'packed') {
+        return parseFidoPackedKey(
+            authenticatorKey,
+            webAuthnResponse.clientDataJSON
+        );
+    }
+
+    if (authenticatorKey.fmt === 'android-safetynet') {
+//        return verifySafetyNetAttestation(webAuthnResponse);
         return parseFidoPackedKey(
             authenticatorKey,
             webAuthnResponse.clientDataJSON

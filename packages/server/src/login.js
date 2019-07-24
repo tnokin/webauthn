@@ -55,5 +55,14 @@ exports.verifyAuthenticatorAssertion = (data, key) => {
         );
     }
 
+    if (key.fmt === 'android-safetynet') {
+        return validateFidoPackedKey(
+            authenticatorDataBuffer,
+            key,
+            data.response.clientDataJSON,
+            data.response.signature
+        );
+    }
+
     return false;
 };
