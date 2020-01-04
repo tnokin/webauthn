@@ -2,6 +2,8 @@
 # Edit by tnokin
 When used this project against Chrome on Android I got an issue: in server/src/registration.js there is a test on some value equals "fido-u2f" and "packed". But instead I received "android-safetynet". I googled for hours for this absurdly complex FIDO protocol (and I find kind of funny that in France FIDO is dog food brand, because it is really what this protocol is) and did many trials and suddenly it started to work - miraculously.  
 
+So this code needs to replace the server side of the webauthn lib.
+
 
 
 # webauthn
